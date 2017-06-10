@@ -1,0 +1,20 @@
+{
+    "name": "tron-massive-launcher",
+    "version": "1.0.0",
+    "description": "A Tron launcher for massive experimentation",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "tron",
+        "launcher",
+        "massive",
+        "experimentation"
+    ],
+    "author": "Quentin Dauprat <21402042@etu.unicaen.fr>",
+    "license": "MIT",
+    "dependencies": {
+        "yargs": "^6.6.0"
+    }
+}

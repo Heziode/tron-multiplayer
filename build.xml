@@ -1,0 +1,109 @@
+<project name="Tron Multiplayer" default="run" basedir=".">
+    <property name="app.name" value="Tron_Multiplayer"/>
+    <property name="app.version" value="1.0.2"/>
+    <property name="app.fullname" value="${app.name}-${app.version}"/>
+    <property name="build.home" value="${basedir}/build"/>
+    <property name="dist.home" value="${basedir}/dist"/>
+    <property name="docs.home" value="${basedir}/docs"/>
+    <property name="docs-gui.home" value="${basedir}/docs-gui"/>
+    <property name="src.home" value="${basedir}/src"/>
+    <property name="src-gui.home" value="${basedir}/src_with_gui"/>
+    <property name="javac.version" value="1.8"/>
+    <property name="javac.encoding" value="UTF-8"/>
+    <property name="main-class" value="fr.unicaen.info.l3.tron.controller.Main"/>
+    <!--
+     ==================== Compile options ===========================
+    -->
+    <property name="compile.debug" value="true"/>
+    <property name="compile.deprecation" value="false"/>
+    <property name="compile.optimize" value="true"/>
+
+
+    <!--
+     ==================== All Target ======================================
+    -->
+    <target name="all" depends="clean,compile" description="Clean build and dist directories, then compile"/>
+    <!--
+     ==================== Clean Target ====================================
+    -->
+    <target name="clean" description="Delete old build and dist directories">
+        <delete dir="${build.home}"/>
+        <delete dir="${dist.home}"/>
+        <delete dir="${docs.home}"/>
+    </target>
+    <!--
+     ==================== Compile Target ==================================
+    -->
+    <target name="compile" depends="prepare" description="Compile Java sources">
+        <javac srcdir="${src.home}" destdir="${build.home}" debug="${compile.debug}"
+               deprecation="${compile.deprecation}" optimize="${compile.optimize}"
+               source="${javac.version}" encoding="${javac.encoding}" includeantruntime="false">
+            <compilerarg value="-Xlint"/>
+        </javac>
+        <!--  Copy application resources  -->
+        <copy todir="${build.home}">
+            <fileset dir="${src.home}" excludes="**/*.java"/>
+        </copy>
+    </target>
+
+    <target name="compile-gui" depends="prepare" description="Compile Java sources">
+        <javac srcdir="${src-gui.home}" destdir="${build.home}" debug="${compile.debug}"
+               deprecation="${compile.deprecation}" optimize="${compile.optimize}"
+               source="${javac.version}" encoding="${javac.encoding}" includeantruntime="false">
+            <compilerarg value="-Xlint"/>
+        </javac>
+        <!--  Copy application resources  -->
+        <copy todir="${build.home}">
+            <fileset dir="${src-gui.home}" excludes="**/*.java"/>
+        </copy>
+    </target>
+    <!--
+     ==================== Prepare Target ==================================
+    -->
+    <target name="prepare">
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${dist.home}"/>
+    </target>
+    <!--
+     ==================== Dist Target =====================================
+    -->
+    <target name="dist" depends="clean,compile,javadoc" description="Create binary distribution">
+        <!--  Create application JAR file  -->
+        <jar jarfile="${dist.home}/${app.fullname}.jar" basedir="${build.home}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="dist-gui" depends="clean,compile-gui,javadoc-gui" description="Create binary distribution">
+        <!--  Create application JAR file  -->
+        <jar jarfile="${dist.home}/${app.fullname}-gui.jar" basedir="${build.home}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+    </target>
+    <!--
+     ==================== Javadoc Target ==================================
+    -->
+    <target name="javadoc" depends="compile" description="Create Javadoc API documentation">
+        <mkdir dir="${docs.home}/api"/>
+        <javadoc sourcepath="${src.home}" destdir="${docs.home}/api" packagenames="*"/>
+    </target>
+
+    <target name="javadoc-gui" depends="compile-gui" description="Create Javadoc API documentation">
+        <mkdir dir="${docs-gui.home}/api"/>
+        <javadoc sourcepath="${src-gui.home}" destdir="${docs-gui.home}/api" packagenames="*"/>
+    </target>
+    <!--
+     ==================== Run Target ==================================
+    -->
+    <target name="run" depends="dist">
+        <java jar="${dist.home}/${app.fullname}.jar" fork="true">
+            <jvmarg value="-Dtron.coal=5 3"/>
+            <jvmarg value="-Dtron.nbCoal=1 2"/>
+            <jvmarg value="-Dtron.gridSize=7"/>
+        </java>
+    </target>
+</project>
