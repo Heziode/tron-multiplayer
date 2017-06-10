@@ -105,7 +105,7 @@ It is possible to export in DOT language the calculations made by paranoid to ea
 
 You can use the **toDot.sh** script to generate them. It assumes that the files are located in a subdirectory **paranoid_traceback**.
 
-![](ressources/cb3400af-99bf-4c05-b14b-ddf5fd160133-0-0_paranoid.svg)
+![](https://rawgit.com/Heziode/tron-multiplayer/master/ressources/cb3400af-99bf-4c05-b14b-ddf5fd160133-0-0_paranoid.svg)
 
 Legend:
 
