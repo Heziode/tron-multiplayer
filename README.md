@@ -2,15 +2,11 @@
 
 This project was designed for a university project.
 
-
-
-The objective of this project it's to determine if exist in configuration who an player can won against an coalition of other players.
+The objective of this project it's to determine if exist in configuration who a player can win against a coalition of other players.
 
  > This project is basically designed for a "statistical study". It is built to be run easily from a script. **There is no GUI**
  >
  > **This project is designed to run on Linux and require JavaFX.**
-
-
 
 For this project, I implemented the Paranoid algorithm, a multiplayer variant (more than two players) of MinMax. It assumes that all players form a coalition against a single player:
 
@@ -69,9 +65,7 @@ Optional :
 
 Exemple : **java -jar -Dtron.gui=false -Dtron.coal="5 3" -Dtron.nbCoal="1 2" -Dtron.gridSize=7 Tron_Multiplayer.jar**
 
-This will launch a game without graphical interface and a solo player with a depth of calculation of 5 against a coalition of 2 players with a depth of calculation of 3 on a grid of 7 by 7.
-
-
+This will launch a game without a graphical use interface (GUI) and a solo player with a depth of calculation of 5 against a coalition of 2 players with a depth of calculation of 3 on a grid of 7 by 7.
 
 ## Export results of a game in CSV format
 
@@ -93,7 +87,7 @@ The export format obtained is as follows (with an example of result in the secon
 
 ## Export Paranoid calculation
 
-It is possible to export in DOT language the calculations made by paranoid to each strokes using the parameter:
+It is possible to export in DOT language the calculations made by paranoid to each stroke using the parameter:
 
 `-Dtron.ptrace=true`
 
@@ -122,7 +116,7 @@ Legend:
 
 You can make mass executions of the program through the script contained in the script directory. 
 
->    Scripts is written in JavaScript and require Node.js
+>    Scripts are written in JavaScript and require Node.js
 
 ## License
 
